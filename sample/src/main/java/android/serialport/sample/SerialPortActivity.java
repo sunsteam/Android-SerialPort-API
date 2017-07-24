@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.serialport.SerialPort;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,7 +45,8 @@ public abstract class SerialPortActivity extends Activity {
                 int size;
                 try {
                     byte[] buffer = new byte[64];
-                    if (mInputStream == null) return;
+                    if (mInputStream == null)
+                        return;
                     size = mInputStream.read(buffer);
                     if (size > 0) {
                         onDataReceived(buffer, size);
@@ -94,7 +96,8 @@ public abstract class SerialPortActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        if (mReadThread != null) mReadThread.interrupt();
+        if (mReadThread != null)
+            mReadThread.interrupt();
         mApplication.closeSerialPort();
         mSerialPort = null;
         super.onDestroy();
